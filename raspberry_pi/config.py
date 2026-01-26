@@ -1,5 +1,5 @@
 # MQTT configuration
-MQTT_BROKER = "172.30.1.81"
+MQTT_BROKER = ""
 MQTT_PORT = 1883
 MQTT_PUB_TOPIC = "inventory/node/"
 

@@ -8,11 +8,11 @@ static const char EDGE_ID = 'B';
 #define LED_EDGE_PIN D1
 
 // ===== WiFi =====
-#define WIFI_SSID     "KT_GiGA_7ABD"
-#define WIFI_PASSWORD "acbc3hh290"
+#define WIFI_SSID     ""
+#define WIFI_PASSWORD ""
 
 // ===== MQTT =====
-#define MQTT_SERVER   "172.30.1.99"
+#define MQTT_SERVER   ""
 #define MQTT_PORT     1883
 #define MQTT_SUB_TOPIC "inventory/node/"
 
