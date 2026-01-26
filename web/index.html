@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>LED Location Control</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>LED Location Control</h1>
+
+<div id="container"></div>
+
+<script>
+  const shelves = ['A', 'B', 'C'];
+  const numPos = 4;
+
+  const container = document.getElementById('container');
+
+  // 선반별 현재 ON 상태 저장
+  // 예: { A: 2, B: null }
+  const activePos = {};
+
+  shelves.forEach(shelf => {
+    activePos[shelf] = null;
+
+    const section = document.createElement('section');
+
+    const h2 = document.createElement('h2');
+    h2.textContent = shelf;
+    section.appendChild(h2);
+
+    const div = document.createElement('div');
+
+    for (let i = 0; i < numPos; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+
+      btn.onclick = () => {
+        // 이전 버튼 OFF
+        if (activePos[shelf] !== null) {
+          const prevBtn = div.children[activePos[shelf]];
+          prevBtn.classList.remove('on');
+        }
+
+        // 현재 버튼 ON
+        btn.classList.add('on');
+        activePos[shelf] = i;
+
+        // 서버에 전송
+        sendLocation(`${shelf}${i}`);
+      };
+
+      div.appendChild(btn);
+    }
+
+    section.appendChild(div);
+    container.appendChild(section);
+  });
+
+  function sendLocation(location) {
+    fetch(`/led?location=${location}`)
+      .then(res => res.json())
+      .then(data => console.log(location, data));
+  }
+</script>
